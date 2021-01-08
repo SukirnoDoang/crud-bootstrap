@@ -30,13 +30,33 @@ include "koneksi.php";
                 </div>
                 <div class="mb-3">
                  <label for="inputKelas" class="form-label">Kelas </label>
-                 <input type="text" class="form-control" id="inputKelas" name="nama" placeholder="Masukan Kelas siswa">
+                 <input type="text" class="form-control" id="inputKelas" name="kelas" placeholder="Masukan Kelas siswa">
                 </div>
                 <input name="daftar" type="submit" class="btn btn-primary" value="Tambah">
                 <a href="index.php" type="button" class="btn btn-info text-white">Kembali </a>
             </form>
         </div>
     </section>
+    <?php
+        // buat kondisi jika tombol diklik
+        if(isset($_POST['daftar'])){
+        // membuat variable setiap field inputan agar kodingan lebih rapi
+        $nis = $_POST['nis'];
+        $nama = $_POST['nama'];
+        $kelas = $_POST['kelas'];
+
+        //membuat query
+        $query = "INSERT INTO tb_siswa (nis, nama, kelas) VALUES ('".$nis."', '".$nama."', '".$kelas."')";
+
+        $result = mysqli_query($koneksi, $query);
+
+        if ($result) {
+            header("location: index.php");
+        } else {
+            echo "<script>alert('Data Gagal ditambahkan!')</script>";
+        }
+        }
+    ?>
     
 </body>
 </html>
