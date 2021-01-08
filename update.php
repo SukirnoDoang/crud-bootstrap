@@ -1,6 +1,7 @@
 <?php
-  include "koneksi.php";
+include "koneksi.php"
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,6 +45,25 @@
       </form>
     </div>
   </section>
+  <?php
+   
+   // Buat kondisi jika tombol data di klik
+   if(isset($_POST['daftar'])){
+     // Membuat variable setiap field inputan agar kodingan lebih rapi.
+     $id = $_POST['id'];
+     $nis = $_POST['nis'];
+     $nama = $_POST['nama'];
+     $kelas = $_POST['kelas'];
+     // Membuat Query
+     $query = "UPDATE tb_siswa SET nis = '$nis', nama = '$nama', kelas = '$kelas' WHERE id = '$id'";
+     $result = mysqli_query($koneksi, $query);
+     if($result){
+       header("location: index.php");
+     } else {
+       echo "<script>alert('Data Gagal di update!')</script>";
+     }
+   }    
+ ?>
   <?php } ?>
 </body>
 </html>
