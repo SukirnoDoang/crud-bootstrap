@@ -27,18 +27,30 @@ include "koneksi.php"
             <th scope="col">Aksi</th>
           </tr>
         </thead>
-          
+          <?php
+          $no = 1;
+          $query = "SELECT * FROM tb_siswa";
+          $result = mysqli_query($koneksi, $query);
+          ?>
+
         <tbody>
-          <tr>
-            <th scope='row'>1</th>
-            <td>data nis</td>
-            <td>data nama</td>
-            <td>data ke</td>
-            <td> 
-              <a href='#' type='button' class='btn btn-success'>Update</a>
-              <a href='#' type='button' class='btn btn-danger' onlick='return confirm("Yakin ingin menghapus data?")'>Delete</a>
-            </td>
-          </tr>  
+            <?php
+                foreach ($result as $data) {
+                    echo "
+                    <tr>
+                    <th scope='row'>". $no++ ."</th>
+                    <td>". $data["nis"] ."</td>
+                    <td>". $data["nama"] ."</td>
+                    <td>". $data["kelas"] ."</td>
+                    <td> 
+                    <a href='update.php?id=".$data["id"]."' type='button' class='btn btn-success'>Update</a>
+                    <a href='delete.php?id=".$data["id"]."' type='button' class='btn btn-danger' onlick='return confirm('Yakin ingin menghapus data?')'>Delete</a>
+                    </td>
+                </tr>
+                ";
+            }
+            ?>
+            
         </tbody>  
       </table>
     </div>
